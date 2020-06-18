@@ -38,15 +38,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Hello React',
+      title: 'XLedger',
       template: paths.appHtml,
     }),
   ],
-  devServer: {
-    index: '',
-    proxy: [{
-      context: ['/api', '/images', '/'],
-      target: 'http://localhost:8001',
-    }],
-  },
 };
