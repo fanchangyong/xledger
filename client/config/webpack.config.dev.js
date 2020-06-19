@@ -42,4 +42,9 @@ module.exports = {
       template: paths.appHtml,
     }),
   ],
+  devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  },
 };

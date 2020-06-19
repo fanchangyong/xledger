@@ -1,0 +1,44 @@
+@require '../styles/palette.styl';
+
+.header
+  display flex
+  justify-content space-between
+
+.icon-plus
+  display inline-block
+  width 26px
+  height 26px
+  line-height @height
+  border-radius 50%
+  text-align center
+  color white
+  background color-primary
+  cursor pointer
+
+.content
+  border 1px solid color-grey-85
+  margin-top 8px
+
+.inner-box
+  padding 20px
+  border-bottom 1px solid color-grey-85
+  &:last-child
+    border-bottom none
+
+.filter
+  display flex
+  justify-content space-between
+
+.filter-row
+  margin 8px 0px
+
+.filter-right
+  display flex
+  line-height 3
+
+.summary-data
+  text-align right
+
+.no-more
+  color color-grey-70
+  margin 12px 0

@@ -4,6 +4,10 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import configureStore from './store/configureStore';
 
+import 'antd/dist/antd.css';
+
+import './index.cm.styl';
+
 const store = configureStore();
 
 ReactDOM.render(

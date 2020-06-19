@@ -1,1 +1,1 @@
-export const UPDATE_HELLO_MSG = 'UPDATE_HELLO_MSG';
+export const REPLACE_BILLS = 'REPLACE_BILLS';

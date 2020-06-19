@@ -1,0 +1,31 @@
+@require '../../styles/palette.styl';
+
+.base
+  position relative
+  display inline-block
+
+.input
+  padding 3px 6px
+  width 100%
+  border 1px solid color-grey-60
+  appearance none
+  cursor pointer
+  outline none
+  &:hover
+  &.focus
+    border-color color-focus
+
+.icon-arrow
+  display flex
+  align-items center
+  color color-grey-60
+  cursor pointer
+  position absolute
+  top 7px
+  right 5px
+
+.menu
+  padding 3px 0px
+  margin-top 10px
+  background white
+  box-shadow 0 2px 20px rgba(0,0,0,.1)
