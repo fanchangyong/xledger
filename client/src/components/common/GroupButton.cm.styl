@@ -1,0 +1,33 @@
+@require '../../styles/palette.styl';
+
+.base
+  display inline-flex
+  border-radius 2px
+
+.btn
+  position relative
+  padding 4px 0px
+  min-width 80px
+  cursor pointer
+  color grey
+  border 1px solid currentColor
+  &.active
+    color color-primary
+    &:not(:first-child)
+      &::after
+        position absolute
+        top 0px
+        left -1px
+        display block
+        background currentColor
+        width 1px
+        height 100%
+        content ''
+  &:not(:first-child)
+    border-left none
+  &:first-child
+    border-top-left-radius 2px
+    border-bottom-left-radius 2px
+  &:last-child
+    border-top-right-radius 2px
+    border-bottom-right-radius 2px
