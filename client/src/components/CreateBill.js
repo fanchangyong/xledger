@@ -57,7 +57,7 @@ function CreateBill({ isOpen, onClose, onSubmit, categoryEntities }) {
         </div>
         <div className={styles.row}>
           <label className={styles.label}>金额：</label>
-          <Input type="number" name="amount" placeholder="请输入金额" />
+          <Input type="number" min="0" name="amount" placeholder="请输入金额" />
         </div>
         <div className={styles.row}>
           <label className={styles.label}>分类：</label>
