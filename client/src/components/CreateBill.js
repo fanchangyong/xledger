@@ -28,12 +28,14 @@ function CreateBill({ isOpen, onClose, onSubmit, categoryEntities }) {
     submitOnChange: false,
   });
 
-  const categoryOptions = Object.keys(categoryEntities).map(categoryId => {
-    return {
-      value: categoryId,
-      label: categoryEntities[categoryId].name,
-    };
-  });
+  const categoryOptions = Object.keys(categoryEntities)
+    .filter(categoryId => categoryEntities[categoryId].type === form.values.type)
+    .map(categoryId => {
+      return {
+        value: categoryId,
+        label: categoryEntities[categoryId].name,
+      };
+    });
 
   const billTypeOptions = [
     {

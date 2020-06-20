@@ -11,7 +11,7 @@ function categoriesReducer(state = initialState, action) {
       const csvString = action.payload;
       const result = Papa.parse(csvString, { header: true });
       const categoryEntities = result.data.reduce((acc, cur) => {
-        acc[cur.id] = cur;
+        acc[cur.id] = { ...cur, type: Number(cur.type) };
         return acc;
       }, {});
       return Object.assign({}, state, {
