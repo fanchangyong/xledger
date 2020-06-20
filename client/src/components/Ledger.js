@@ -140,9 +140,6 @@ function Ledger() {
           <div className={styles.showType}>
             <GroupButton options={showTypeOptions} value={showType} onChange={setShowType} />
           </div>
-          {showType === SHOW_TYPES.RANK && (<Tabs options={rankTypeOptions} value={rankType} onChange={setRankType} />)}
-        </div>
-        <div className={styles.innerBox}>
           <div className={styles.filter}>
             <div className={styles.filterLeft}>
               <div className={styles.filterRow}>
@@ -186,7 +183,10 @@ function Ledger() {
             {showType === SHOW_TYPES.LEDGER ? (
               <BillList bills={filteredBills} categoryEntities={categoryEntities} />
             ) : (
-              <RankList bills={filteredBills} categoryEntities={categoryEntities} />
+              <>
+                <Tabs options={rankTypeOptions} value={rankType} onChange={setRankType} />
+                <RankList bills={filteredBills} categoryEntities={categoryEntities} />
+              </>
             )}
             <div className={styles.noMore}>
                 没有更多了...
