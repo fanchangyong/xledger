@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import styles from './RankList.cm.styl';
 
 function RankList({ bills, categoryEntities }) {
+  const sortedBills = [...bills.sort((a, b) => a.amount < b.amount)];
   return (
     <div className={styles.base}>
-      {bills.map((bill, idx) => {
+      {sortedBills.map((bill, idx) => {
         const {
           id,
           categoryId,

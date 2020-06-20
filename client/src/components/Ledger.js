@@ -78,6 +78,10 @@ function Ledger() {
     label: '全部',
   });
 
+  useEffect(() => {
+    setCategoryId('all');
+  }, [rankType, showType]);
+
   const filteredBills = useMemo(() => {
     return bills.filter((bill) => {
       if (month !== '全部') {
