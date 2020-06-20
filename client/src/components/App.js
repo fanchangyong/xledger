@@ -7,9 +7,9 @@ function App() {
   return (
     <div className={styles.base}>
       <div className={styles.content}>
-        <div className={styles.logo}>
+        <a className={styles.logo} href="/">
           XLedger
-        </div>
+        </a>
         <Ledger />
       </div>
     </div>
