@@ -11,13 +11,13 @@ function billsReducer(state = initialState, action) {
       const csvString = action.payload;
       const result = Papa.parse(csvString, { header: true });
       const bills = result.data.map((d, idx) => ({
-        ...d,
         type: Number(d.type),
         amount: Math.abs(Number(d.amount)),
         time: Number(d.time),
+        categoryId: d.category,
         id: idx,
       }));
-      const sortedBills = [...bills].sort((a, b) => a.time >= b.time);
+      const sortedBills = [...bills].sort((a, b) => a.time < b.time);
       return Object.assign({}, state, {
         bills: sortedBills,
       });
