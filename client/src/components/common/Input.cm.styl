@@ -20,7 +20,7 @@
     color color-focus
 
 .input-wrapper
-  display flex
+  display inline-flex
 
 .input
   color black
@@ -34,11 +34,13 @@
     border-color color-focus
 
 .error
-  height 14px
-  margin-top 5px
-  font-size 12px
+  display inline-block
+  margin-left 5px
+  max-width 15em
   color color-error
   visibility hidden
+  white-space nowrap
+  overflow hidden
   &.show
     visibility visible
 

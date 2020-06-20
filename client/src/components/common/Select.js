@@ -17,10 +17,15 @@ function Select(props) {
 
   const [opened, setOpened] = useState(false);
 
-  const [field] = useField(name);
+  const [field, meta] = useField(name);
 
   if (!props.handleChange && !field) {
     throw new Error('Must pass props.handleChange or make Select inside a Form');
+  }
+
+  let error;
+  if (meta) {
+    error = meta.error;
   }
 
   let value;
@@ -49,6 +54,7 @@ function Select(props) {
       name={name}
       value={selectedOption.label}
       label={label}
+      error={error}
       opened={opened}
       setOpened={setOpened}
     >

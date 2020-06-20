@@ -41,7 +41,7 @@ const Input = React.forwardRef(function Input(props, ref) {
           {...others}
         />
       </div>
-      {error && <div className={cx(styles.error, { show: touched })}>{error}</div>}
+      {error && <span className={cx(styles.error, { show: touched })}>{error}</span>}
     </div>
   );
 });

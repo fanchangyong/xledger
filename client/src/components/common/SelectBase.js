@@ -13,6 +13,7 @@ function SelectBase(props) {
     name,
     value,
     opened,
+    error,
     setOpened,
     children,
   } = props;
@@ -24,7 +25,7 @@ function SelectBase(props) {
 
   return (
     <div className={styles.base}>
-      <div onClick={() => setOpened(!opened)}>
+      <div onClick={() => setOpened(!opened)} className={styles.inputWrapper}>
         <input
           ref={inputRef}
           id={id}
@@ -40,6 +41,7 @@ function SelectBase(props) {
           size="12px"
         />
       </div>
+      <span className={styles.error}>{error}</span>
       <Dropdown
         isOpen={opened}
         anchorEl={inputRef.current}
@@ -59,6 +61,7 @@ SelectBase.defaultProps = {
 SelectBase.propTypes = {
   name: PropTypes.string,
   value: PropTypes.any,
+  error: PropTypes.string,
   opened: PropTypes.bool,
   setOpened: PropTypes.func,
   children: PropTypes.node,

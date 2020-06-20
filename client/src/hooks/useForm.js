@@ -57,6 +57,7 @@ function useForm(props) {
   } = state;
 
   async function validateAllFields() {
+    console.log('## validate all: ', values)
     const errors = {};
     try {
       await validationSchema.current.validate(values, {
@@ -64,6 +65,7 @@ function useForm(props) {
       });
     } catch (error) {
       if (error.name === 'ValidationError') {
+        console.log('## error inner: ', error.inner)
         for (const err of error.inner) {
           errors[err.path] = err.message;
         }

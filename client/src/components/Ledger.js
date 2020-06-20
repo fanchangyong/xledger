@@ -94,7 +94,7 @@ function Ledger() {
   return (
     <div className={styles.base}>
       {showCreateBills && (
-        <CreateBill isOpen={showCreateBills} categoryEntities={categoryEntities} />
+        <CreateBill isOpen={showCreateBills} onClose={() => setShowCreateBills(false)} categoryEntities={categoryEntities} />
       )}
       <div className={styles.header}>
         <div>
