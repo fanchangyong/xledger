@@ -27,7 +27,7 @@ CashFlowIcon.propTypes = {
   type: PropTypes.number,
 };
 
-function BillList({ bills }) {
+function BillList({ bills, categoryEntities }) {
   return bills.map(bill => {
     const {
       id,
@@ -44,10 +44,10 @@ function BillList({ bills }) {
         <CashFlowIcon type={type} />
         <div className={styles.billDetail}>
           <div className={styles.billDetailLeft}>
-            <div>
-              {category}
+            <div className={styles.category}>
+              {categoryEntities[category].name}
             </div>
-            <div>
+            <div className={styles.time}>
               {dt.getFullYear()}-{dt.getMonth()}-{dt.getDate()} {dt.getHours()}:{dt.getMinutes()}:{dt.getSeconds()}
             </div>
           </div>

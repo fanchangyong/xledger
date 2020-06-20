@@ -17,8 +17,9 @@ function billsReducer(state = initialState, action) {
         time: Number(d.time),
         id: idx,
       }));
+      const sortedBills = [...bills].sort((a, b) => a.time >= b.time);
       return Object.assign({}, state, {
-        bills,
+        bills: sortedBills,
       });
     }
     default: {
