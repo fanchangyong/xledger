@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GroupButton from './common/GroupButton';
 import MonthSelect from './common/MonthSelect';
 import Select from './common/Select';
+import Icon from './common/Icon';
 import BillList from './BillList';
 import { BILL_TYPES, BILL_TYPE_COLORS } from '../common/constants';
 import { fetchBills } from '../actions/bill';
@@ -84,9 +85,7 @@ function Ledger() {
         <div>
           账单
         </div>
-        <div className={styles.iconPlus}>
-          +
-        </div>
+        <Icon name="plus-fill" className={styles.iconPlus} />
       </div>
       <div className={styles.content}>
         <div className={styles.innerBox}>
