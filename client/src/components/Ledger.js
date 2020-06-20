@@ -5,6 +5,7 @@ import GroupButton from './common/GroupButton';
 import MonthSelect from './common/MonthSelect';
 import Select from './common/Select';
 import BillList from './BillList';
+import { BILL_TYPES, BILL_TYPE_COLORS } from '../common/constants';
 import { fetchBills } from '../actions/bill';
 import { splitDate } from '../common/util';
 import { fetchCategories } from '../actions/category';
@@ -116,10 +117,10 @@ function Ledger() {
                 </div>
               </div>
               <div className={styles.summaryData}>
-                <div>
+                <div style={{ color: BILL_TYPE_COLORS[BILL_TYPES.INCOME] }}>
                   +13000
                 </div>
-                <div>
+                <div style={{ color: BILL_TYPE_COLORS[BILL_TYPES.EXPENSE] }}>
                   -900
                 </div>
               </div>
