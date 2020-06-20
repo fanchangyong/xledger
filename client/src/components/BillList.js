@@ -37,8 +37,6 @@ function BillList({ bills, categoryEntities }) {
       amount,
     } = bill;
 
-    const dt = new Date(time);
-
     const category = categoryEntities[categoryId] || {};
 
     return (
@@ -50,7 +48,7 @@ function BillList({ bills, categoryEntities }) {
               {category.name}
             </div>
             <div className={styles.time}>
-              {dt.getFullYear()}-{dt.getMonth()}-{dt.getDate()} {dt.getHours()}:{dt.getMinutes()}:{dt.getSeconds()}
+              {time.getFullYear()}-{time.getMonth()}-{time.getDate()} {time.getHours()}:{time.getMinutes()}:{time.getSeconds()}
             </div>
           </div>
           <div className={styles.billAmount} style={{ color: BILL_TYPE_COLORS[type] }}>

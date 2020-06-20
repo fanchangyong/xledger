@@ -5,27 +5,9 @@ import useScrollIntoView from '../../hooks/useScrollIntoView';
 import classNames from 'classnames';
 import Icon from './Icon';
 import SelectBase from './SelectBase';
+import { splitDate, formatDate } from '../../common/util';
+
 import styles from './MonthSelect.cm.styl';
-
-function formatDate(year, month) {
-  if (month >= 10) {
-    return `${year}-${month}`;
-  }
-  return `${year}-0${month}`;
-}
-
-function splitDate(dateStr) {
-  if (!dateStr) {
-    return {};
-  }
-  const splited = dateStr.split('-');
-  if (splited.length < 2) {
-    return {};
-  }
-  const year = Number(splited[0]);
-  const month = Number(splited[1]);
-  return { year, month };
-}
 
 const initialState = {
   opened: false,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import GroupButton from './common/GroupButton';
@@ -6,6 +6,7 @@ import MonthSelect from './common/MonthSelect';
 import Select from './common/Select';
 import BillList from './BillList';
 import { fetchBills } from '../actions/bill';
+import { splitDate } from '../common/util';
 import { fetchCategories } from '../actions/category';
 
 import styles from './Ledger.cm.styl';
@@ -43,7 +44,7 @@ function Ledger() {
   }, []);
 
   const [showType, setShowType] = useState(SHOW_TYPES.LEDGER);
-  const [category, setCategory] = useState('all');
+  const [categoryId, setCategoryId] = useState('all');
   const [month, setMonth] = useState('全部');
 
   const showTypeOptions = Object.keys(SHOW_TYPES).map(k => SHOW_TYPES[k]);
@@ -58,6 +59,23 @@ function Ledger() {
     value: 'all',
     label: '全部',
   });
+
+  const filteredBills = useMemo(() => {
+    return bills.filter((bill) => {
+      if (month !== '全部') {
+        const splittedDate = splitDate(month);
+        if (splittedDate.year !== bill.time.getFullYear() || splittedDate.month !== bill.time.getMonth()) {
+          return false;
+        }
+      }
+      if (categoryId !== 'all') {
+        if (bill.categoryId !== categoryId) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [bills, month, categoryId]);
 
   return (
     <div className={styles.base}>
@@ -85,7 +103,7 @@ function Ledger() {
               </div>
               <div className={styles.filterRow}>
                 选择分类：
-                <Select options={categoryOptions} value={category} handleChange={setCategory} />
+                <Select options={categoryOptions} value={categoryId} handleChange={setCategoryId} />
               </div>
             </div>
             <div className={styles.filterRight}>
@@ -115,7 +133,7 @@ function Ledger() {
             </div>
           ) : (
             <>
-              <BillList bills={bills} categoryEntities={categoryEntities} />
+              <BillList bills={filteredBills} categoryEntities={categoryEntities} />
               <div className={styles.noMore}>
                 没有更多了...
               </div>

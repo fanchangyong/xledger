@@ -13,7 +13,7 @@ function billsReducer(state = initialState, action) {
       const bills = result.data.map((d, idx) => ({
         type: Number(d.type),
         amount: Math.abs(Number(d.amount)),
-        time: Number(d.time),
+        time: new Date(Number(d.time)),
         categoryId: d.category,
         id: idx,
       }));
