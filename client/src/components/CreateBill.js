@@ -11,18 +11,14 @@ import RadioGroup from './common/RadioGroup';
 
 import styles from './CreateBill.cm.styl';
 
-function CreateBill({ isOpen, onClose, categoryEntities }) {
-  function onSubmit() {
-    console.log('## on submit')
-  }
-
+function CreateBill({ isOpen, onClose, onSubmit, categoryEntities }) {
   const validationSchema = yup.object().shape({
     amount: yup.string().required('请输入金额'),
     categoryId: yup.string().required('请选择分类'),
   });
   const form = useForm({
     initialValues: {
-      billType: BILL_TYPES.INCOME,
+      type: BILL_TYPES.INCOME,
       amount: '',
       categoryId: '',
     },
@@ -55,7 +51,7 @@ function CreateBill({ isOpen, onClose, categoryEntities }) {
       <Form form={form}>
         <div className={styles.row}>
           <label className={styles.label}>收支：</label>
-          <RadioGroup name="billType" options={billTypeOptions} />
+          <RadioGroup name="type" options={billTypeOptions} />
         </div>
         <div className={styles.row}>
           <label className={styles.label}>金额：</label>
@@ -75,6 +71,7 @@ CreateBill.defaultProps = {};
 CreateBill.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
+  onSubmit: PropTypes.func,
   categoryEntities: PropTypes.object,
 };
 

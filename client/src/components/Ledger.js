@@ -8,8 +8,8 @@ import Icon from './common/Icon';
 import BillList from './BillList';
 import CreateBill from './CreateBill';
 import { BILL_TYPES, BILL_TYPE_COLORS } from '../common/constants';
-import { fetchBills } from '../actions/bill';
 import { splitDate } from '../common/util';
+import { fetchBills, addBill } from '../actions/bill';
 import { fetchCategories } from '../actions/category';
 
 import styles from './Ledger.cm.styl';
@@ -91,11 +91,13 @@ function Ledger() {
     return acc;
   }, { income: 0, expense: 0 });
 
+  function handleCreateBill(values) {
+    dispatch(addBill(values));
+    setShowCreateBills(false);
+  }
+
   return (
     <div className={styles.base}>
-      {showCreateBills && (
-        <CreateBill isOpen={showCreateBills} onClose={() => setShowCreateBills(false)} categoryEntities={categoryEntities} />
-      )}
       <div className={styles.header}>
         <div>
           账单
@@ -156,6 +158,12 @@ function Ledger() {
           )}
         </div>
       </div>
+      <CreateBill
+        isOpen={showCreateBills}
+        categoryEntities={categoryEntities}
+        onClose={() => setShowCreateBills(false)}
+        onSubmit={handleCreateBill}
+      />
     </div>
   );
 }

@@ -11,3 +11,12 @@ export function fetchBills(callback = () => {}) {
     callback();
   };
 }
+
+export function addBill(bill) {
+  return dispatch => {
+    dispatch({
+      type: types.ADD_BILL,
+      payload: bill,
+    });
+  };
+}
