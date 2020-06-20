@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import useScrollIntoView from '../../hooks/useScrollIntoView';
 import SelectBase from './SelectBase';
 import useField from '../../hooks/useField';
 import { isString } from '../../common/util';
@@ -41,6 +42,7 @@ function Select(props) {
   });
 
   const selectedOption = options.find(opt => opt.value === value) || {};
+  const selectedItemRef = useScrollIntoView();
 
   return (
     <SelectBase
@@ -55,6 +57,7 @@ function Select(props) {
           return (
             <div
               key={optValue}
+              ref={value === optValue ? selectedItemRef : null}
               className={cx(styles.menuItem, value === optValue && styles.activeMenuItem)}
               onClick={() => props.handleChange ? props.handleChange(optValue) : field.handleChange(name, optValue)}
             >
