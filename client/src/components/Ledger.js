@@ -134,10 +134,10 @@ function Ledger() {
               </div>
               <div className={styles.summaryData}>
                 <div style={{ color: BILL_TYPE_COLORS[BILL_TYPES.INCOME] }}>
-                  {totalCounts.income}
+                  {totalCounts.income.toFixed(2)}
                 </div>
                 <div style={{ color: BILL_TYPE_COLORS[BILL_TYPES.EXPENSE] }}>
-                  {totalCounts.expense}
+                  {totalCounts.expense.toFixed(2)}
                 </div>
               </div>
             </div>

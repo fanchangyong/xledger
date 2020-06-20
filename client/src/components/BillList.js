@@ -53,7 +53,7 @@ function BillList({ bills, categoryEntities }) {
           </div>
           <div className={styles.billAmount} style={{ color: BILL_TYPE_COLORS[type] }}>
             {type === BILL_TYPES.INCOME ? '+' : '-'}
-            {amount}
+            {amount.toFixed(2)}
           </div>
         </div>
       </div>
