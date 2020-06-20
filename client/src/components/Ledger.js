@@ -6,6 +6,8 @@ import MonthSelect from './common/MonthSelect';
 import Select from './common/Select';
 import Icon from './common/Icon';
 import BillList from './BillList';
+import RankList from './RankList';
+import Tabs from './common/Tabs';
 import CreateBill from './CreateBill';
 import { BILL_TYPES, BILL_TYPE_COLORS } from '../common/constants';
 import { splitDate } from '../common/util';
@@ -49,16 +51,27 @@ function Ledger() {
   const [showType, setShowType] = useState(SHOW_TYPES.LEDGER);
   const [categoryId, setCategoryId] = useState('all');
   const [month, setMonth] = useState('全部');
+  const [rankType, setRankType] = useState(BILL_TYPES.INCOME);
 
   const [showCreateBills, setShowCreateBills] = useState(false);
 
   const showTypeOptions = Object.keys(SHOW_TYPES).map(k => SHOW_TYPES[k]);
-  const categoryOptions = Object.keys(categoryEntities).map(categoryId => {
-    return {
-      value: categoryId,
-      label: categoryEntities[categoryId].name,
-    };
-  });
+
+  const categoryOptions = Object.keys(categoryEntities)
+    .filter(categoryId => {
+      if (showType === SHOW_TYPES.RANK) {
+        const category = categoryEntities[categoryId];
+        return category.type === rankType;
+      } else {
+        return true;
+      }
+    })
+    .map(categoryId => {
+      return {
+        value: categoryId,
+        label: categoryEntities[categoryId].name,
+      };
+    });
 
   categoryOptions.splice(0, 0, {
     value: 'all',
@@ -78,9 +91,12 @@ function Ledger() {
           return false;
         }
       }
+      if (showType === SHOW_TYPES.RANK) {
+        return bill.type === rankType;
+      }
       return true;
     });
-  }, [bills, month, categoryId]);
+  }, [bills, month, categoryId, rankType, showType]);
 
   const totalCounts = filteredBills.reduce((acc, cur) => {
     if (cur.type === BILL_TYPES.INCOME) {
@@ -90,6 +106,17 @@ function Ledger() {
     }
     return acc;
   }, { income: 0, expense: 0 });
+
+  const rankTypeOptions = [
+    {
+      label: '收入',
+      value: BILL_TYPES.INCOME,
+    },
+    {
+      label: '支出',
+      value: BILL_TYPES.EXPENSE,
+    },
+  ];
 
   function handleCreateBill(values) {
     dispatch(addBill(values));
@@ -106,7 +133,10 @@ function Ledger() {
       </div>
       <div className={styles.content}>
         <div className={styles.innerBox}>
-          <GroupButton options={showTypeOptions} value={showType} onChange={setShowType} />
+          <div className={styles.showType}>
+            <GroupButton options={showTypeOptions} value={showType} onChange={setShowType} />
+          </div>
+          {showType === SHOW_TYPES.RANK && (<Tabs options={rankTypeOptions} value={rankType} onChange={setRankType} />)}
         </div>
         <div className={styles.innerBox}>
           <div className={styles.filter}>
@@ -148,14 +178,16 @@ function Ledger() {
             <div>
               正在加载数据...
             </div>
-          ) : (
-            <>
+          ) : (<div>
+            {showType === SHOW_TYPES.LEDGER ? (
               <BillList bills={filteredBills} categoryEntities={categoryEntities} />
-              <div className={styles.noMore}>
+            ) : (
+              <RankList bills={filteredBills} categoryEntities={categoryEntities} />
+            )}
+            <div className={styles.noMore}>
                 没有更多了...
-              </div>
-            </>
-          )}
+            </div>
+          </div>)}
         </div>
       </div>
       <CreateBill

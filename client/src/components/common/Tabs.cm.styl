@@ -1,0 +1,17 @@
+@require '../../styles/palette';
+
+.tab
+  display inline-block
+  margin-right 2em
+  cursor pointer
+  &.active
+    color color-primary
+    &::after
+      display block
+      content ''
+      width 100%
+      height 2px
+      margin-top 6px
+      background color-primary
+  &:last-child
+    margin-right 0
