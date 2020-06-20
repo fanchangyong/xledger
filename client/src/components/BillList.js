@@ -37,6 +37,8 @@ function BillList({ bills }) {
       amount,
     } = bill;
 
+    const dt = new Date(time);
+
     return (
       <div key={id} className={styles.bill}>
         <CashFlowIcon type={type} />
@@ -46,7 +48,7 @@ function BillList({ bills }) {
               {category}
             </div>
             <div>
-              {time}
+              {dt.getFullYear()}-{dt.getMonth()}-{dt.getDate()} {dt.getHours()}:{dt.getMinutes()}:{dt.getSeconds()}
             </div>
           </div>
           <div className={styles.billAmount} style={{ color: BILL_TYPE_COLORS[type] }}>

@@ -6,6 +6,7 @@ import MonthSelect from './common/MonthSelect';
 import Select from './common/Select';
 import BillList from './BillList';
 import { fetchBills } from '../actions/bill';
+import { fetchCategories } from '../actions/category';
 
 import styles from './Ledger.cm.styl';
 
@@ -20,12 +21,24 @@ function Ledger() {
     return state.bills.bills;
   });
 
-  const [loading, setLoading] = useState(false);
+  const categoryEntities = useSelector(state => {
+    return state.categories.categoryEntities;
+  });
+
+  const [loadingBills, setLoadingBills] = useState(false);
+  const [loadingCategories, setLoadingCategories] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setLoadingBills(true);
     dispatch(fetchBills(() => {
-      setLoading(false);
+      setLoadingBills(false);
+    }));
+  }, []);
+
+  useEffect(() => {
+    setLoadingCategories(true);
+    dispatch(fetchCategories(() => {
+      setLoadingCategories(false);
     }));
   }, []);
 
@@ -95,13 +108,13 @@ function Ledger() {
           </div>
         </div>
         <div className={styles.innerBox}>
-          {loading ? (
+          {(loadingBills || loadingCategories) ? (
             <div>
               正在加载数据...
             </div>
           ) : (
             <>
-              <BillList bills={bills} />
+              <BillList bills={bills} categoryEntities={categoryEntities} />
               <div className={styles.noMore}>
                 没有更多了...
               </div>

@@ -14,6 +14,7 @@ function billsReducer(state = initialState, action) {
         ...d,
         type: Number(d.type),
         amount: Math.abs(Number(d.amount)),
+        time: Number(d.time),
         id: idx,
       }));
       return Object.assign({}, state, {
