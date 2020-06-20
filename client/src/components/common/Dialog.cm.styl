@@ -1,0 +1,51 @@
+@require '../../styles/palette';
+
+.overlay
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background rgba(0, 0, 0, .4)
+  overflow-y auto
+  z-index 99
+  display flex
+  justify-content center
+  align-items center
+  padding 0 20px
+
+.content
+  width 600px
+  margin 0 auto
+  border-radius 2px
+  background white
+  padding 15px 25px
+
+.header
+  display flex
+  padding-bottom 8px
+  border-bottom 1px solid color-grey-90
+  margin-bottom 25px
+
+.title
+  flex 1
+  font-size 16px
+  font-weight bolder
+
+.icon-back
+  margin-right 8px
+  cursor pointer
+  color color-grey-70
+
+.icon-close
+  font-size 16px
+  cursor pointer
+  color color-grey-70
+
+.footer
+  margin-top 25px
+  text-align right
+
+.btn-cancel
+  margin-right 1em
+  color color-grey-60

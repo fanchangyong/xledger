@@ -1,0 +1,68 @@
+@require '../../styles/palette.styl';
+
+.container
+  position relative
+  display inline-block
+
+.label
+  position absolute
+  top 0px
+  left 0px
+  cursor text
+  pointer-events none
+  transform translate(0px, 15px)
+  transition transform .1s
+  color color-grey-60
+  &.shrink
+    transform scale(0.8) translate(0, 0)
+    transform-origin top left
+  &.focus
+    color color-focus
+
+.input-wrapper
+  display flex
+
+.input
+  color black
+  flex 1
+  padding 3px 6px
+  outline none
+  appearance none
+  border-radius 2
+  border 1px solid color-grey-60
+  &:focus
+    border-color color-focus
+
+.error
+  height 14px
+  margin-top 5px
+  font-size 12px
+  color color-error
+  visibility hidden
+  &.show
+    visibility visible
+
+.after-addon
+  padding-bottom 6px
+  align-self flex-end
+  white-space nowrap
+
+.menu
+  padding 3px 0px
+  margin-top 10px
+  background white
+  max-height 200px
+  overflow-y auto
+  box-shadow 0 2px 20px rgba(0,0,0,.1)
+
+.menu-item
+  height 32px
+  line-height 32px
+  cursor pointer
+  padding-left 10px
+  padding-right 10px
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+  &:hover
+    background-color color-grey-98

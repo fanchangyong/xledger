@@ -6,6 +6,7 @@ import MonthSelect from './common/MonthSelect';
 import Select from './common/Select';
 import Icon from './common/Icon';
 import BillList from './BillList';
+import CreateBill from './CreateBill';
 import { BILL_TYPES, BILL_TYPE_COLORS } from '../common/constants';
 import { fetchBills } from '../actions/bill';
 import { splitDate } from '../common/util';
@@ -49,6 +50,8 @@ function Ledger() {
   const [categoryId, setCategoryId] = useState('all');
   const [month, setMonth] = useState('全部');
 
+  const [showCreateBills, setShowCreateBills] = useState(false);
+
   const showTypeOptions = Object.keys(SHOW_TYPES).map(k => SHOW_TYPES[k]);
   const categoryOptions = Object.keys(categoryEntities).map(categoryId => {
     return {
@@ -79,13 +82,25 @@ function Ledger() {
     });
   }, [bills, month, categoryId]);
 
+  const totalCounts = filteredBills.reduce((acc, cur) => {
+    if (cur.type === BILL_TYPES.INCOME) {
+      acc.income += cur.amount;
+    } else if (cur.type === BILL_TYPES.EXPENSE) {
+      acc.expense += cur.amount;
+    }
+    return acc;
+  }, { income: 0, expense: 0 });
+
   return (
     <div className={styles.base}>
+      {showCreateBills && (
+        <CreateBill isOpen={showCreateBills} categoryEntities={categoryEntities} />
+      )}
       <div className={styles.header}>
         <div>
           账单
         </div>
-        <Icon name="plus-fill" className={styles.iconPlus} />
+        <Icon name="plus-fill" className={styles.iconPlus} onClick={() => setShowCreateBills(true)} />
       </div>
       <div className={styles.content}>
         <div className={styles.innerBox}>
@@ -117,10 +132,10 @@ function Ledger() {
               </div>
               <div className={styles.summaryData}>
                 <div style={{ color: BILL_TYPE_COLORS[BILL_TYPES.INCOME] }}>
-                  +13000
+                  {totalCounts.income}
                 </div>
                 <div style={{ color: BILL_TYPE_COLORS[BILL_TYPES.EXPENSE] }}>
-                  -900
+                  {totalCounts.expense}
                 </div>
               </div>
             </div>

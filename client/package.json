@@ -17,11 +17,13 @@
     "papaparse": "^5.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-modal": "^3.11.2",
     "react-popper": "^2.2.3",
     "react-redux": "^7.2.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
-    "use-callback-ref": "^1.2.4"
+    "use-callback-ref": "^1.2.4",
+    "use-debounce": "^3.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

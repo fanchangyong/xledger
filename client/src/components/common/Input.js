@@ -1,32 +1,64 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import useField from '../../hooks/useField';
+
 import styles from './Input.cm.styl';
 
-function Input(props) {
+const cx = classNames.bind(styles);
+
+const Input = React.forwardRef(function Input(props, ref) {
   const {
-    placeholder,
-    value,
-    onChange,
+    name,
+    label,
+    className,
+    inputClassName,
+    ...others
   } = props;
 
+  const containerRef = useRef(null);
+
+  const [field, meta] = useField(name);
+  const {
+    error,
+    touched,
+  } = meta;
+
+  const {
+    value,
+    handleDOMChange,
+  } = field;
+
   return (
-    <div className={styles.base}>
-      <input
-        className={styles.input}
-        placeholder={placeholder}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
+    <div className={classNames(styles.container, className)} ref={containerRef}>
+      <div className={styles.inputWrapper}>
+        <input
+          ref={ref}
+          name={name}
+          value={value || ''}
+          className={classNames(styles.input, inputClassName)}
+          onChange={handleDOMChange}
+          {...others}
+        />
+      </div>
+      {error && <div className={cx(styles.error, { show: touched })}>{error}</div>}
     </div>
   );
-}
-
-Input.defaultProps = {};
+});
 
 Input.propTypes = {
-  placeholder: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  validator: PropTypes.func,
+  label: PropTypes.string,
+  defaultShrink: PropTypes.bool,
+  error: PropTypes.string,
+  containerClassName: PropTypes.string,
+  afterAddon: PropTypes.any,
+  className: PropTypes.string,
+  inputClassName: PropTypes.string,
   value: PropTypes.string,
-  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  search: PropTypes.func,
 };
 
 export default Input;

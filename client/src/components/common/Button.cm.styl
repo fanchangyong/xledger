@@ -1,0 +1,103 @@
+@require '../../styles/palette.styl';
+
+// 按钮颜色定义
+btn-color-primary = color-primary
+
+.btn
+  display inline-block
+  line-height 1
+  cursor pointer
+  white-space nowrap
+  user-select none
+  text-align center
+  vertical-align middle
+  border 1px solid
+  border-radius 2px
+  transition all .3s
+
+// filled button
+.btn-type-filled.btn-color-primary
+  background-color btn-color-primary
+  border-color @background-color
+  color white
+  &:hover
+    background-color lighten(btn-color-primary, 10%)
+
+// btn loading
+.btn-loading
+  cursor default
+
+.btn-type-filled.btn-color-primary.btn-loading
+  background-color lighten(btn-color-primary, 25%)
+  border-color @bakground-color
+
+// light filled button
+.btn-type-filled.btn-color-primary.btn-light
+  background-color lighten(btn-color-primary, 90%)
+  border-color @background-color
+  color btn-color-primary
+  &:hover
+    background-color btn-color-primary
+    color white
+.btn-type-filled.btn-danger.btn-light
+  background-color lighten(color-danger, 90%)
+  border-color @background-color
+  color color-danger
+  &:hover
+    background-color color-danger
+    color white
+
+// outlined button
+.btn-type-outlined
+  background-color transparent
+  border-color currentColor
+.btn-type-outlined.btn-color-primary
+  color btn-color-primary
+.btn-type-outlined.btn-color-white
+  color white
+.btn-type-outlined.btn-color-link
+  color color-link
+.btn-type-outlined.btn-color-grey
+  color color-grey-60
+  &:hover
+    color color-primary
+
+// link button
+.btn-type-link
+  border-color transparent
+  background transparent
+  color color-link
+.btn-type-link.btn-danger
+  color color-danger
+
+// btn size: middle, small, large
+.btn-sz-middle
+  padding 9px 18px
+.btn-sz-small
+  padding 5px 7px
+.btn-sz-large
+  padding 13px 28px
+
+// Shape
+.btn-shape-round
+  border-radius 999px
+.btn-shape-circle
+  border-radius 50%
+
+// Align
+.btn-align-left
+  padding-left 0px
+
+.block
+  width 100%
+
+.scale
+  transform-origin top
+  transition transform .1s
+  &:hover
+    transform-origin top
+    transform scale(1.1)
+    transition transform .15s
+
+.icon
+  margin-right 5px
