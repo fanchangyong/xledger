@@ -30,6 +30,7 @@ function splitDate(dateStr) {
 const initialState = {
   opened: false,
   showType: 'year',
+  selectedAll: false,
   selectedYear: null,
   selectedMonth: null,
 };
@@ -52,6 +53,7 @@ function reducer(state, msg) {
         ...state,
         selectedYear: payload.year,
         selectedMonth: payload.month,
+        selectedAll: false,
       };
     }
     case 'SET_SELECTED_YEAR': {
@@ -59,6 +61,7 @@ function reducer(state, msg) {
         ...state,
         selectedYear: payload,
         showType: 'month',
+        selectedAll: false,
       };
     }
     case 'SET_SELECTED_MONTH': {
@@ -66,12 +69,22 @@ function reducer(state, msg) {
         ...state,
         selectedMonth: payload,
         opened: false,
+        selectedAll: false,
       };
     }
     case 'SET_SHOW_TYPE': {
       return {
         ...state,
         showType: payload,
+      };
+    }
+    case 'SET_SELECTED_ALL': {
+      return {
+        ...state,
+        selectedYear: null,
+        selectedMonth: null,
+        selectedAll: payload,
+        opened: false,
       };
     }
     default: {
@@ -138,12 +151,15 @@ function MonthSelect(props) {
   const {
     opened,
     showType,
+    selectedAll,
     selectedYear,
     selectedMonth,
   } = state;
 
   useEffect(() => {
-    if (value) {
+    if (value === '全部') {
+      dispatch({ type: 'SET_SELECTED_ALL', payload: true });
+    } else if (value) {
       const { year, month } = splitDate(value);
       dispatch({ type: 'SET_VALUE', payload: { year, month } });
     }
@@ -169,6 +185,11 @@ function MonthSelect(props) {
     }
   }
 
+  function handleSelectAll() {
+    dispatch({ type: 'SET_SELECTED_ALL', payload: true });
+    handleChange('全部');
+  }
+
   return (
     <SelectBase
       name={name}
@@ -186,6 +207,12 @@ function MonthSelect(props) {
               onClick={() => dispatch({ type: 'SET_SHOW_TYPE', payload: 'year' })} />
           )}
           {showType === 'year' ? '请选择年份' : `${selectedYear}年`}
+          <div
+            className={classNames(styles.all, selectedAll && styles.activeAll)}
+            onClick={() => handleSelectAll()}
+          >
+            全部
+          </div>
         </div>
       </div>
       <Menu

@@ -43,20 +43,21 @@ function Ledger() {
   }, []);
 
   const [showType, setShowType] = useState(SHOW_TYPES.LEDGER);
-  const [category, setCategory] = useState();
-  const [month, setMonth] = useState();
+  const [category, setCategory] = useState('all');
+  const [month, setMonth] = useState('全部');
 
   const showTypeOptions = Object.keys(SHOW_TYPES).map(k => SHOW_TYPES[k]);
-  const categoryOptions = [
-    {
-      label: '全部',
-      value: 0,
-    },
-    {
-      label: '车贷',
-      value: 1,
-    },
-  ];
+  const categoryOptions = Object.keys(categoryEntities).map(categoryId => {
+    return {
+      value: categoryId,
+      label: categoryEntities[categoryId].name,
+    };
+  });
+
+  categoryOptions.splice(0, 0, {
+    value: 'all',
+    label: '全部',
+  });
 
   return (
     <div className={styles.base}>
