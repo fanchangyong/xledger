@@ -37,7 +37,4 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
   ],
-  devServer: {
-    contentBase: './build',
-  },
 };
