@@ -184,7 +184,7 @@ function Ledger() {
               <BillList bills={filteredBills} categoryEntities={categoryEntities} />
             ) : (
               <>
-                <Tabs options={rankTypeOptions} value={rankType} onChange={setRankType} />
+                <Tabs className={styles.tabs} options={rankTypeOptions} value={rankType} onChange={setRankType} />
                 <RankList bills={filteredBills} categoryEntities={categoryEntities} />
               </>
             )}

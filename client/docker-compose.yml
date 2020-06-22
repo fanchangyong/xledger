@@ -3,4 +3,4 @@ ngx-xledger:
   volumes:
    - ./build:/usr/share/nginx/html
   ports:
-   - "3000:80"
+   - "8000:80"
